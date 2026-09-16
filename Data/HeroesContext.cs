@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Scaffolding_inverso.Models;
 
 namespace Scaffolding_inverso.Data;
 
-public partial class HeroesContext : DbContext
+public partial class HeroesContext : IdentityDbContext<IdentityUser>
 {
     public HeroesContext(DbContextOptions<HeroesContext> options)
         : base(options)
@@ -18,6 +18,7 @@ public partial class HeroesContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
         OnModelCreatingPartial(modelBuilder);
     }
 
