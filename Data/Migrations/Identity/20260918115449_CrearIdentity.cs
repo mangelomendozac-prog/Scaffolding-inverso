@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Scaffolding_inverso.Data.Migrations
+namespace Scaffolding_inverso.Data.Migrations.Identity
 {
     /// <inheritdoc />
-    public partial class AddIdentity : Migration
+    public partial class CrearIdentity : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -192,7 +192,6 @@ namespace Scaffolding_inverso.Data.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
-
         }
 
         /// <inheritdoc />
@@ -218,7 +217,6 @@ namespace Scaffolding_inverso.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
         }
     }
 }

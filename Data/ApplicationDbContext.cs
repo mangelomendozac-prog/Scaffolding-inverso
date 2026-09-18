@@ -1,18 +1,15 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Scaffolding_inverso.Models;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace Scaffolding_inverso.Data;
 
-public partial class HeroesContext : DbContext
+public partial class ApplicationDbContext : IdentityDbContext<IdentityUser>
 {
-    public HeroesContext(DbContextOptions<HeroesContext> options)
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
     {
     }
-
-    public virtual DbSet<Heroes> Heroes { get; set; }
-
-    public virtual DbSet<SuperPoderes> SuperPoderes { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -9,16 +9,21 @@ builder.Services.AddDbContext<HeroesContext>(options =>
         builder.Configuration.GetConnectionString("HeroesDb")
         ?? throw new InvalidOperationException("Falta la conexión HeroesDb.")));
 
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlite(
+        builder.Configuration.GetConnectionString("HeroesDb")
+        ?? throw new InvalidOperationException("Falta la conexión HeroesDb.")));
+
 builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
     options.User.RequireUniqueEmail = true;
-    options.Password.RequiredLength = 5;
+    options.Password.RequiredLength = 8;
     options.Password.RequireLowercase = true;
     options.Password.RequireNonAlphanumeric = true;
     options.Password.RequireDigit = true;
 })
-.AddEntityFrameworkStores<HeroesContext>();
+.AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddRazorPages(options =>
 {
@@ -37,9 +42,9 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseAuthentication();
 app.UseHttpsRedirection();
 app.UseRouting();
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapStaticAssets();
 app.MapRazorPages().WithStaticAssets();

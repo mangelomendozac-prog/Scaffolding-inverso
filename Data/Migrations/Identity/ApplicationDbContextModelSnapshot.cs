@@ -2,20 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Scaffolding_inverso.Data;
 
 #nullable disable
 
-namespace Scaffolding_inverso.Data.Migrations
+namespace Scaffolding_inverso.Data.Migrations.Identity
 {
-    [DbContext(typeof(HeroesContext))]
-    [Migration("20260916121247_AddIdentity")]
-    partial class AddIdentity
+    [DbContext(typeof(ApplicationDbContext))]
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.12");
@@ -216,51 +213,6 @@ namespace Scaffolding_inverso.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Scaffolding_inverso.Models.Heroes", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Ciudad")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("IdentidadSecreta")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Heroes");
-                });
-
-            modelBuilder.Entity("Scaffolding_inverso.Models.SuperPoderes", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Descripcion")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("HeroeId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("HeroeId");
-
-                    b.ToTable("SuperPoderes");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -310,22 +262,6 @@ namespace Scaffolding_inverso.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Scaffolding_inverso.Models.SuperPoderes", b =>
-                {
-                    b.HasOne("Scaffolding_inverso.Models.Heroes", "Heroe")
-                        .WithMany("SuperPoderes")
-                        .HasForeignKey("HeroeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Heroe");
-                });
-
-            modelBuilder.Entity("Scaffolding_inverso.Models.Heroes", b =>
-                {
-                    b.Navigation("SuperPoderes");
                 });
 #pragma warning restore 612, 618
         }
