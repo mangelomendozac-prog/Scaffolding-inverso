@@ -25,6 +25,8 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 })
 .AddEntityFrameworkStores<ApplicationDbContext>();
 
+builder.Services.AddControllersWithViews();
+
 builder.Services.AddRazorPages(options =>
 {
     options.Conventions.AuthorizeFolder("/SuperPoderes");
@@ -48,4 +50,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.MapStaticAssets();
 app.MapRazorPages().WithStaticAssets();
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller}/{action}/{id?}");
 app.Run();
